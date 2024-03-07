@@ -88,19 +88,20 @@ jobs:
         servers: |
           [{
                 "id": "anypoint-exchange-v3",
-                "username": "${{ secrets.ANYPOINT_USERNAME }}",
-                "password": "${{ secrets.ANYPOINT_PASSWORD }}"
+                "username": "${{ secrets.secrets.anypoint_platform_username }}",
+                "password": "${{ secrets.Aanypoint_platform_password }}"
             }
           ]
           
     - name: Deploy to CloudHub
       env:
-        AUTHOR: "Mario Korac"
+        USERNAME: ${{ secrets.anypoint_platform_username }}
+        PASSWORD: ${{ secrets.anypoint_platform_password }}
+        KEY: ${{ secrets.decryption_key }}
       run: |
         artifactName=$(ls *.jar | head -1)
-        mvn --file check-in-papi-app/pom.xml deploy -DmuleDeploy \
-        -DapplicationName="checkin-cicd-mario-training" \
-        -Denvironment="dev" \
-        -Dencrypt.key="${{ secrets.ENCRYPT_KEY }}" \
-        -Dclient_id="${{ secrets.AP_CLIENTID }}" \
-        -Dclient_secret="${{ secrets.AP_CLIENTSECRET }}"
+        mvn deploy -DskipMunitTests -DmuleDeploy \
+         -Dmule.artifact=$artifactName \
+         -Danypoint.username="$USERNAME" \
+         -Danypoint.password="$PASSWORD" \
+         -Ddecryption.key="$KEY"
