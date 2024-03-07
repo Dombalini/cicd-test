@@ -89,7 +89,7 @@ jobs:
         servers: |
           [{
                 "id": "anypoint-exchange-v3",
-                "username": "${{ secrets.secrets.anypoint_platform_username }}",
+                "username": "${{ secrets.anypoint_platform_username }}",
                 "password": "${{ secrets.anypoint_platform_password }}"
             }
           ]
