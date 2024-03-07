@@ -64,6 +64,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
             name: artifacts
+            path: target/*.jar
             #path: check-in-papi-app/target/*.jar
             
             
@@ -89,7 +90,7 @@ jobs:
           [{
                 "id": "anypoint-exchange-v3",
                 "username": "${{ secrets.secrets.anypoint_platform_username }}",
-                "password": "${{ secrets.Aanypoint_platform_password }}"
+                "password": "${{ secrets.anypoint_platform_password }}"
             }
           ]
           
